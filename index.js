@@ -1,4 +1,20 @@
 const express = require('express');
+const bodyParser = require("body-parser");
+const faker = require("faker");
+const times = require("lodash.times");
+const random = require("lodash.random");
+const exphbs = require("express-handlebars");
+const cors = require("cors");
+var path = require("path");
+const fs = require("fs");
+const util = require("util");
+const readdir = util.promisify(fs.readdir);
+const hierarchy = require("sequelize-hierarchy");
+var readlineSync = require("readline-sync");
+var colors = require("colors");
+var net = require("net");
+const app = express();
+
 const app = express();
 const host = process.env.IP  || '0.0.0.0';
 const port = process.env.PORT || 8080;
@@ -7,8 +23,8 @@ const mongo = require('mongodb').MongoClient;
 const mongoUri = process.env.uri;
 const mongoUsername = process.env.username || process.env.MONGODB_USER;
 const mongoPassword = process.env.password || process.env.MONGODB_PASSWORD;
-const dbName = process.env.database_name || 
-			   process.env.MONGODB_DBNAME || 
+const dbName = process.env.database_name ||
+			   process.env.MONGODB_DBNAME ||
 			   process.env.MONGODB_DATABASE ||
 			   'sampledb';
 const dbServiceName = process.env.DATABASE_SERVICE_NAME || 'localhost';
@@ -25,9 +41,9 @@ if (mongoUri) {
 else if (process.env.MONGODB_URL){
 	dbConnectionUrl = process.env.MONGODB_URL || 'mongodb://localhost:27017/sampledb';
 } else {
-	dbConnectionUrl = 'mongodb://' + mongoUsername + ':' + 
-					mongoPassword + '@' + 
-					dbServiceName + ':27017/' 
+	dbConnectionUrl = 'mongodb://' + mongoUsername + ':' +
+					mongoPassword + '@' +
+					dbServiceName + ':27017/'
 					+ dbName;
 }
 
