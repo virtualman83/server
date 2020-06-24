@@ -13,7 +13,6 @@ const hierarchy = require("sequelize-hierarchy");
 var readlineSync = require("readline-sync");
 var colors = require("colors");
 var net = require("net");
-const app = express();
 
 const app = express();
 const host = process.env.IP  || '0.0.0.0';
